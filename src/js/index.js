@@ -1,5 +1,5 @@
-// import '../css/style.css'
+import css from '../css/style.css'
 function sayHi(){
-    console.log('vediamo se va');
+    console.log('vediamdo sdde va');
 }
 sayHi()

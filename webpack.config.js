@@ -11,19 +11,16 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: "All books you want"
+            title: "All books you want",
+            template: path.resolve(__dirname, "./src/index.html")
         })
     ],
-    module:{
-        rules:[
-            {
-                test: /\css$/,
-                use:[
-                    'style-loader',
-                    'css-loader'
-                ]
-            }
-          
-        ]
-    }
+    module: {
+        rules: [
+          {
+            test: /\.css$/i,
+            use: ["style-loader", "css-loader"],
+          },
+        ],
+      }
 }
