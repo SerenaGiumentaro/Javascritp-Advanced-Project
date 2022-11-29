@@ -3,11 +3,18 @@
   <head>
     <meta charset="utf-8">
     <title> <%= htmlWebpackPlugin.options.title %></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="/dist/bundle.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <script defer src="/dist/bundle.js"></script> -->
 </head>
 
   <body>
 <h1>All books you want</h1>
-    
+<div class="search-box">
+  <input type="text" placeholder="What you want to read?" id="keyword">
+  <input type="submit" id="submit" value="Cerca"></input>
+</div>
+<div class="result">
+  
+</div>
   </body>
 </html>
