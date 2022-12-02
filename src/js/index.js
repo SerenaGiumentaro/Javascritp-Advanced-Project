@@ -38,9 +38,7 @@ axios.get(`https://openlibrary.org/subjects/${searchData}.json`)
        axios.get(`https://openlibrary.org${work.key}.json`)
        .then(res => {
         console.log(res)
-  
 
-        
         // checking if there is a cover otherwise use the generic photo
         !res.data.covers || res.data.covers === null 
         ? console.log('nessuna foto')
@@ -55,9 +53,6 @@ axios.get(`https://openlibrary.org/subjects/${searchData}.json`)
     // handle error
     console.log(error);
   })
-  .then(function () {
-    // always executed
-  });
 }
 
 submit.addEventListener('click', getData)
