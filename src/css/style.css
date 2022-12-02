@@ -1,3 +1,70 @@
-h1{
-    color: purple;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* flex elements  */
+body,.result, .card-book{
+    display: flex;
+   
+
+}
+body{
+    flex-direction: column;
+    align-items: center;
+}
+.result{
+    width: 80%;
+    flex-wrap: wrap;
+}
+.title{
+    margin: 15px 0;
+    color:#84ACCE ;
+    font-size: 15px;
+    cursor: pointer;
+}
+.book-img{
+    width: 250px;
+    height: 280px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    
+}
+.card-book{
+    flex-direction: column;
+    width: 250px;
+    height: 300px;
+    margin: 80px;
+}
+.msg{
+    font-size: 20px;
+}
+.info{
+    background: #fff;
+    position: fixed;
+    width: 50%;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% , -50%);
+    border: 1px solid black;
+}
+.hidden{
+    display: none;
+}
+.close{
+    float: right;
+    background: transparent;
+    border: none;
+    margin: 5px;
+    padding: 5px 7px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.close:hover{
+    background: red;
+}
+.module-title{
+    font-weight: 600;
+    margin: 5px 0;
 }
