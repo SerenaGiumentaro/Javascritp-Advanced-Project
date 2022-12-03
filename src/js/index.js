@@ -4,6 +4,7 @@ const axios = require('axios')
 const keyword = document.getElementById('keyword')
 const submit = document.getElementById('submit')
 const result = document.querySelector('.result')
+const categories = document.querySelector('nav')
 
 function draw(className, elToAppend, type){
   let newEl = document.createElement(type)
@@ -11,19 +12,15 @@ function draw(className, elToAppend, type){
   elToAppend.append(newEl)
   return newEl
 }
-
 // function for get data from Open Library API 
-const getData = () => {
-  // empty the result element from previous research 
-  result.innerHTML = ''
-  // creating loader 
-  const loading = document.createElement('p')
-  loading.innerHTML = 'Loading...'
-  result.append(loading)
-  // reading the value in the input text and transform for being used in json url 
-  const searchData = keyword.value.toLowerCase().split(' ').join('_')
-  // with the axios's help asking for data from Open Library API 
-axios.get(`https://openlibrary.org/subjects/${searchData}.json`)
+function callApi(subject){
+    // empty the result element from previous research 
+    result.innerHTML = ''
+    // creating loader 
+    const loading = document.createElement('p')
+    loading.innerHTML = 'Loading...'
+    result.append(loading)
+  axios.get(`https://openlibrary.org/subjects/${subject}.json`)
 .then(function (response) {
     // handle success
     // empty the loader 
@@ -60,8 +57,8 @@ axios.get(`https://openlibrary.org/subjects/${searchData}.json`)
           const textModule = draw('module-text', infoModule, 'p')
           closeBtn.innerHTML = 'X'
           
-          textModule.innerHTML = res.data.description?.value
-          titleModule.innerHTML = res.data.authors
+          textModule.innerHTML = res.data.description?.value || `Sorry! We don't have any description about this title`
+          titleModule.innerHTML = res.data.authors[0].author.key
           // remove the module
           closeBtn.addEventListener('click', () => {
             infoModule.remove()
@@ -70,7 +67,6 @@ axios.get(`https://openlibrary.org/subjects/${searchData}.json`)
       })
       });
     }
-    
   })
   .catch(function (error) {
     // handle error
@@ -78,4 +74,17 @@ axios.get(`https://openlibrary.org/subjects/${searchData}.json`)
   })
 }
 
+// function for have data from input search console 
+const getData = () => {
+  // reading the value in the input text and transform for being used in json url 
+  const searchData = keyword.value.toLowerCase().split(' ').join('_')
+  // with the axios's help asking for data from Open Library API 
+  callApi(searchData)
+}
+
+const categoriesData = (e) => {
+    const subject = e.target.innerHTML.toLowerCase()
+    callApi(subject)
+}
 submit.addEventListener('click', getData)
+categories.addEventListener('click', categoriesData)

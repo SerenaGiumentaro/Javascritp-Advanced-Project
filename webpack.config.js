@@ -11,7 +11,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: "All books you want",
+            title: "The Book Index",
             template: path.resolve(__dirname, "./src/index.html")
         })
     ],
