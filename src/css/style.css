@@ -50,6 +50,7 @@ h1{
     left: 50%;
     transform: translate(-50% , -50%);
     border: 1px solid black;
+    z-index: 9999;
 }
 .hidden{
     display: none;
@@ -77,4 +78,14 @@ nav li{
     cursor: pointer;
     list-style: none;
     margin: 0 10px;
+}
+input[type='text']{
+    width: 40vw;
+    min-width: 185px;
+}
+input[type='submit']{
+    width: 4.5rem;
+}
+.search-box{
+    margin: .5rem 0;
 }

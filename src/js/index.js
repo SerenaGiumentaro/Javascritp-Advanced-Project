@@ -57,8 +57,14 @@ function callApi(subject){
           const textModule = draw('module-text', infoModule, 'p')
           closeBtn.innerHTML = 'X'
           
-          textModule.innerHTML = res.data.description?.value || `Sorry! We don't have any description about this title`
-          titleModule.innerHTML = res.data.authors[0].author.key
+          textModule.innerHTML = res.data.description?.value || res.data.description || `Sorry! We don't have any description about this title`
+          // // axios.get(`https://openlibrary.org${res.data.authors[0].author.key}.json`)
+          // axios.get(`https://openlibrary.org/authors/OL33421A.json`)
+          // .then(res => {
+          //   console.log(`author ${res}`);
+          //   titleModule.innerHTML = res.name || `No author information avalaible`
+          // })
+         
           // remove the module
           closeBtn.addEventListener('click', () => {
             infoModule.remove()
