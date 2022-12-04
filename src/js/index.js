@@ -101,3 +101,11 @@ const categoriesData = (e) => {
 }
 submit.addEventListener('click', getData)
 categories.addEventListener('click', categoriesData)
+
+// activate search after press Enter key 
+keyword.addEventListener('keydown', (e) => {
+  console.log(e.key)
+  if(e.key === 'Enter'){
+    getData()
+  }
+})

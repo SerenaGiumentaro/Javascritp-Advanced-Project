@@ -5,7 +5,7 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 /* flex elements  */
-body,.result, .card-book,nav{
+body,.result, .card-book,nav, .title-search-container{
     display: flex;
 }
 body{
@@ -72,24 +72,47 @@ h1{
 }
 nav{
     margin: 50px;
+    flex-wrap: wrap;
+}
+nav li:first-child{
+    background:#D3F6DB ;
 }
 nav li{
+    width: 80px;
+    height: 80px;
     cursor: pointer;
     list-style: none;
-    margin: 0 10px;
+    margin: 7px 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 7px;
+
 }
-input[type='text']{
+input[type='search']{
     width: 40vw;
     min-width: 185px;
     border-radius: 25px 0;
     padding: 0 20px;
 }
-input[type='submit']{
+button[type='submit']{
     width: 4.5rem;
     background: #353535;
     color: #fff;
     border-radius: 25px 0;
+    cursor: pointer;
 }
 .search-box{
     margin: .5rem 0;
+}
+.title-search-container{
+    flex-direction: column;
+    align-items: center;
+}
+@media screen and (max-width:780px) {
+    body{
+      
+    }
+    nav{
+        
+    }
+    
 }
