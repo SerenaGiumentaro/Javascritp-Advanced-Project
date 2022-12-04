@@ -50,24 +50,31 @@ function callApi(subject){
         : cover.style.backgroundImage = `url(https://covers.openlibrary.org/b/id/${res.data.covers.filter(n => n != -1)[0]}-M.jpg)`
        
         // click on book title give a book's description 
-        title.addEventListener('click', () => {
+        title.addEventListener('click', (e) => {
+          const thisTitle = e.target
           const infoModule = draw('info', result, 'div')
           const closeBtn = draw('close', infoModule, 'button')
           const titleModule = draw('module-title', infoModule, 'p')
           const textModule = draw('module-text', infoModule, 'p')
           closeBtn.innerHTML = 'X'
-          
+          titleModule.innerHTML = 'Description:'
           textModule.innerHTML = res.data.description?.value || res.data.description || `Sorry! We don't have any description about this title`
-          // // axios.get(`https://openlibrary.org${res.data.authors[0].author.key}.json`)
-          // axios.get(`https://openlibrary.org/authors/OL33421A.json`)
-          // .then(res => {
-          //   console.log(`author ${res}`);
-          //   titleModule.innerHTML = res.name || `No author information avalaible`
-          // })
-         
+          
           // remove the module
           closeBtn.addEventListener('click', () => {
             infoModule.remove()
+          })
+          // remove the module when click outside the info box
+          document.addEventListener('click', (e) => {
+            if(e.target != infoModule && e.target != thisTitle && e.target != titleModule && e.target != textModule){
+            infoModule.remove()
+            }
+          })
+          // remove info box after pressing Escape button 
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape'){
+              infoModule.remove()
+            }
           })
         })
       })
