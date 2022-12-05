@@ -60,7 +60,11 @@ function callApi(subject){
           closeBtn.innerHTML = 'X'
           titleModule.innerHTML = 'Description:'
           textModule.innerHTML = res.data.description?.value || res.data.description || `Sorry! We don't have any description about this title`
-          
+          // check if there's too much text and convert in scroll text
+          if(infoModule.scrollHeight > window.innerHeight){
+            infoModule.style.maxHeight = '80vh'
+            infoModule.style.overflowY = 'scroll'
+          }
           // remove the module
           closeBtn.addEventListener('click', () => {
             infoModule.remove()
