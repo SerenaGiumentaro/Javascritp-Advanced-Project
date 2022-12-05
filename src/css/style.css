@@ -2,7 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+    font-family: 'Playfair Display', serif;
 }
 /* flex elements  */
 body,.result, .card-book,nav, .title-search-container, footer, main, .search-box{
@@ -86,7 +87,6 @@ h1 span{
     padding: 5px 7px;
     border-radius: 5px;
     cursor: pointer;
-    font-family: 'Courier New', Courier, monospace;
 }
 .close:hover{
     background: #D3F6DB;
@@ -163,6 +163,9 @@ footer{
     }
     input[type='search']{
         font-size: .8rem;
+    }
+    nav li{
+        font-size: 13px;
     }
    
 }

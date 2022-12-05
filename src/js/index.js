@@ -57,7 +57,7 @@ function callApi(subject){
           const closeBtn = draw('close', infoModule, 'button')
           const titleModule = draw('module-title', infoModule, 'p')
           const textModule = draw('module-text', infoModule, 'p')
-          closeBtn.innerHTML = 'X'
+          closeBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20"><path d="m6.062 14.708-.77-.77L9.229 10 5.292 6.062l.77-.77L10 9.229l3.938-3.937.77.77L10.771 10l3.937 3.938-.77.77L10 10.771Z"/></svg>`
           titleModule.innerHTML = 'Description:'
           textModule.innerHTML = res.data.description?.value || res.data.description || `Sorry! We don't have any description about this title`
           // check if there's too much text and convert in scroll text
@@ -102,6 +102,7 @@ const getData = () => {
 
 const categoriesData = (e) => {
     categoriesList.forEach(el => el.classList.remove('active'))
+    if(e.target === categories){return}
     e.target.classList.toggle('active')
     const subject = e.target.innerHTML.toLowerCase()
     callApi(subject)
@@ -111,7 +112,6 @@ categories.addEventListener('click', categoriesData)
 
 // activate search after press Enter key 
 keyword.addEventListener('keydown', (e) => {
-  console.log(e.key)
   if(e.key === 'Enter'){
     getData()
   }
