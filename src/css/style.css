@@ -11,19 +11,29 @@ body,.result, .card-book,nav, .title-search-container, footer, main, .search-box
 body{
     flex-direction: column;
     align-items: center;
+    
 }
 main{
     flex-direction: column;
     align-items: center;
 }
 h1{
+    margin: 20px 0;
     font-size: 4rem;
-    color: #5603AD;
+    color: #353535;
+}
+h1 span{
+    color: #D3F6DB;
+    background: #5603AD;
+    padding: 0 10px;
 }
 .result{
     width: 80%;
     flex-wrap: wrap;
     padding: 90px 0;
+    justify-content: center;
+    align-items: center;
+    position: relative;
 }
 .title{
     margin: 15px 5px;
@@ -61,7 +71,9 @@ h1{
     transform: translate(-50% , -50%);
     z-index: 9999;
     border-radius: 5px;
-    padding: 16px;
+    padding: 32px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+    
 }
 .hidden{
     display: none;
@@ -72,11 +84,12 @@ h1{
     border: none;
     margin: 5px;
     padding: 5px 7px;
-    border-radius: 50%;
+    border-radius: 5px;
     cursor: pointer;
+    font-family: 'Courier New', Courier, monospace;
 }
 .close:hover{
-    background: red;
+    background: #D3F6DB;
 }
 .module-title{
     font-weight: 600;
@@ -85,9 +98,11 @@ h1{
 nav{
     margin: 50px;
     flex-wrap: wrap;
+    justify-content: center;
 }
-nav li:first-child{
+.active{
     background:#D3F6DB ;
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
 nav li{
     display: flex;
@@ -105,7 +120,7 @@ nav li{
 }
 input[type='search']{
     width: 40vw;
-    min-width: 200px;
+    min-width: 236px;
     border-radius: 5px;
     padding: 5px 20px;
     border: none;
@@ -139,9 +154,15 @@ footer{
     background-color: #353535;
     color: #D3F6DB;
 }
-@media screen and (max-width:480px) {
+@media screen and (max-width:600px) {
     h1{
         font-size: 3rem;
     }
-    
+    nav{
+        margin: 20px;
+    }
+    input[type='search']{
+        font-size: .8rem;
+    }
+   
 }

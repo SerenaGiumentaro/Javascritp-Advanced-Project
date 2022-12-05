@@ -5,6 +5,7 @@ const keyword = document.getElementById('keyword')
 const submit = document.getElementById('submit')
 const result = document.querySelector('.result')
 const categories = document.querySelector('nav')
+const categoriesList = document.querySelectorAll('nav li')
 
 function draw(className, elToAppend, type){
   let newEl = document.createElement(type)
@@ -96,6 +97,8 @@ const getData = () => {
 }
 
 const categoriesData = (e) => {
+    categoriesList.forEach(el => el.classList.remove('active'))
+    e.target.classList.toggle('active')
     const subject = e.target.innerHTML.toLowerCase()
     callApi(subject)
 }
