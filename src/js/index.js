@@ -46,7 +46,8 @@ function callApi(subject){
 
         // checking if there is a cover otherwise use the generic photo
         !res.data.covers || res.data.covers === null 
-        ? console.log('nessuna foto')
+        ? cover.style.backgroundImage = `url(../src/assets/Cover-not-found.png)`
+
                // filter the array covers so we don't have 404 error
         : cover.style.backgroundImage = `url(https://covers.openlibrary.org/b/id/${res.data.covers.filter(n => n != -1)[0]}-M.jpg)`
        
