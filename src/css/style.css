@@ -167,5 +167,7 @@ footer{
     nav li{
         font-size: 13px;
     }
-   
+   .info{
+    width: 70%;
+   }
 }
