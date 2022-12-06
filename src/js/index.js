@@ -6,6 +6,8 @@ const submit = document.getElementById('submit')
 const result = document.querySelector('.result')
 const categories = document.querySelector('nav')
 const categoriesList = document.querySelectorAll('nav li')
+let allTheData = []
+
 
 function draw(className, elToAppend, type){
   let newEl = document.createElement(type)
@@ -13,85 +15,47 @@ function draw(className, elToAppend, type){
   elToAppend.append(newEl)
   return newEl
 }
+
 // function for get data from Open Library API 
-function callApi(subject){
+async function callApi(subject){
     // empty the result element from previous research 
     result.innerHTML = ''
     // creating loader 
     const loading = document.createElement('p')
     loading.innerHTML = 'Loading...'
     result.append(loading)
-  axios.get(`https://openlibrary.org/subjects/${subject}.json`)
-.then(function (response) {
-    // handle success
-    // empty the loader 
-    loading.innerHTML = ''
-    // checking if the data exist 
-    if(response.data.work_count === 0){
-      // show a message when nothing is found 
-      const message = draw('msg',result, 'p')
-      message.innerHTML = "Sorry! Nothing found, try to use different words..."
-    }else{
-      console.table(response.data.works);
+    try{
+      const response = await axios.get(`https://openlibrary.org/subjects/${subject}.json`)
+      // handle success
+      // empty the loader 
+  
+      // checking if the data exist 
+      if(response.data.work_count === 0){
+        // show a message when nothing is found 
+        const message = draw('msg',result, 'p')
+        message.innerHTML = "Sorry! Nothing found, try to use different words..."
+        return
+      }
       // we receive an array of works and we loop it for show all data 
-      response.data.works.forEach(work => {
-        // crete a title and a cover to show 
-        const cardBook = draw('card-book', result, 'div')
-        const title = draw('title', cardBook, 'h4')
-        const cover = draw('book-img', cardBook, 'div')
-        title.innerHTML = work.title
-       axios.get(`https://openlibrary.org${work.key}.json`)
-       .then(res => {
-        console.log(res)
-
-        // checking if there is a cover otherwise use the generic photo
-        !res.data.covers || res.data.covers === null 
-        ? cover.style.backgroundImage = `url(../src/assets/Cover-not-found.png)`
-
-               // filter the array covers so we don't have 404 error
-        : cover.style.backgroundImage = `url(https://covers.openlibrary.org/b/id/${res.data.covers.filter(n => n != -1)[0]}-M.jpg)`
-       
-        // click on book title give a book's description 
-        title.addEventListener('click', (e) => {
-          const thisTitle = e.target
-          const infoModule = draw('info', result, 'div')
-          const closeBtn = draw('close', infoModule, 'button')
-          const titleModule = draw('module-title', infoModule, 'p')
-          const textModule = draw('module-text', infoModule, 'p')
-          closeBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20"><path d="m6.062 14.708-.77-.77L9.229 10 5.292 6.062l.77-.77L10 9.229l3.938-3.937.77.77L10.771 10l3.937 3.938-.77.77L10 10.771Z"/></svg>`
-          titleModule.innerHTML = 'Description:'
-          textModule.innerHTML = res.data.description?.value || res.data.description || `Sorry! We don't have any description about this title`
-          // check if there's too much text and convert in scroll text
-          if(infoModule.scrollHeight > window.innerHeight){
-            infoModule.style.maxHeight = '80vh'
-            infoModule.style.overflowY = 'scroll'
-          }
-          // remove the module
-          closeBtn.addEventListener('click', () => {
-            infoModule.remove()
-          })
-          // remove the module when click outside the info box
-          document.addEventListener('click', (e) => {
-            if(e.target != infoModule && e.target != thisTitle && e.target != titleModule && e.target != textModule){
-            infoModule.remove()
-            }
-          })
-          // remove info box after pressing Escape button 
-          document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape'){
-              infoModule.remove()
-            }
-          })
-        })
-      })
-      });
+      allTheData = []
+  
+      await Promise.all(response.data.works.map(async work => {
+        const book = await createObjFromData(work)
+        allTheData.push(book)
+      }))
+      console.log(allTheData)
+      loading.innerHTML = ''
+      renderBooks(allTheData)
+  
     }
-  })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  })
-}
+    catch(error){
+      console.error(error)
+    }
+
+    }
+
+
+
 
 // function for have data from input search console 
 const getData = () => {
@@ -105,7 +69,7 @@ const categoriesData = (e) => {
     categoriesList.forEach(el => el.classList.remove('active'))
     if(e.target === categories){return}
     e.target.classList.toggle('active')
-    const subject = e.target.innerHTML.toLowerCase()
+    const subject = e.target.textContent.toLowerCase()
     callApi(subject)
 }
 submit.addEventListener('click', getData)
@@ -117,3 +81,71 @@ keyword.addEventListener('keydown', (e) => {
     getData()
   }
 })
+// function that create an oblect with all data 
+async function createObjFromData(work){
+  const book = {title: work.title, cover:'', author:'', description:''}
+
+  const res = await axios.get(`https://openlibrary.org${work.key}.json`)  
+  const bookInfo = res.data       
+  // checking if there is a cover otherwise use the generic photo
+  !bookInfo.covers || bookInfo.covers === null 
+    ? book.cover = `url(../src/assets/Cover-not-found.png)`
+          // filter the array covers so we don't have 404 error
+    : book.cover = `url(https://covers.openlibrary.org/b/id/${bookInfo.covers.filter(n => n != -1)[0]}-M.jpg)`
+
+  book.description = bookInfo.description?.value || bookInfo.description || `Sorry! We don't have any description about this title`
+  const authorsRes = await axios.get(`https://openlibrary.org${bookInfo.authors[0].author.key}.json`)
+          
+  book.author = authorsRes.data.name
+            
+  return book                
+}
+
+function renderBook(book){
+      // crete a title and a cover to show 
+      const cardBook = draw('card-book', result, 'div')
+      const title = draw('title', cardBook, 'h4')
+      const author = draw('author', cardBook, 'h3')
+      const cover = draw('book-img', cardBook, 'div')
+      title.innerText = book.title
+      author.innerText = book.author
+      cover.style.backgroundImage = book.cover
+      // click on book title give a book's description 
+      cardBook.addEventListener('click', (e) => {showModule(e,book)})
+   
+      
+}
+function renderBooks(arrBook){
+  arrBook.forEach(book => renderBook(book))
+}
+
+function showModule(e,book){
+  const thisBook = e.target
+  const infoModule = draw('info', result, 'div')
+  const closeBtn = draw('close', infoModule, 'button')
+  const titleModule = draw('module-title', infoModule, 'p')
+  const textModule = draw('module-text', infoModule, 'p')
+  closeBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20"><path d="m6.062 14.708-.77-.77L9.229 10 5.292 6.062l.77-.77L10 9.229l3.938-3.937.77.77L10.771 10l3.937 3.938-.77.77L10 10.771Z"/></svg>`
+  titleModule.innerHTML = 'Description:'
+  textModule.innerHTML = book.description
+  // check if there's too much text and convert in scroll text
+  if(infoModule.scrollHeight > window.innerHeight){
+    infoModule.style.maxHeight = '80vh'
+    infoModule.style.overflowY = 'scroll'
+  }
+  // remove the module
+  closeBtn.addEventListener('click', infoModule.remove)
+  // remove the module when click outside the info box
+  document.addEventListener('click', (e) => {
+    const hasClickedOutsideTheModule = e.target != infoModule && e.target != thisBook && e.target != titleModule && e.target != textModule
+    if(hasClickedOutsideTheModule){
+      infoModule.remove()
+    }
+  })
+  // remove info box after pressing Escape button 
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape'){
+      infoModule.remove()
+    }
+  })
+}

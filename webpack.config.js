@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const path = require('path')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 module.exports = {
     mode: 'development',
@@ -12,7 +13,13 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: "The Book Index",
-            template: path.resolve(__dirname, "./src/index.html")
+            template: path.resolve(__dirname, "./src/index.html"),
+            favicon: './src/assets/favicon.ico',
+            publicPath: './'
+        }),
+        new FaviconsWebpackPlugin({
+          logo: './src/assets/favicon.ico',
+          publicPath: '.'
         })
     ],
     module: {
