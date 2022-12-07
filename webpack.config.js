@@ -14,8 +14,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: "The Book Index",
             template: path.resolve(__dirname, "./src/index.html"),
-            favicon: './src/assets/favicon.ico',
-            publicPath: './'
+            favicon: './src/assets/favicon.ico'
         }),
         new CopyPlugin({
           patterns:[
