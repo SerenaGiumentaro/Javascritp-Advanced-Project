@@ -85,7 +85,7 @@ async function createObjFromData(work){
   const bookInfo = res.data       
   // checking if there is a cover otherwise use the generic photo
   !bookInfo.covers || bookInfo.covers === null 
-    ? book.cover = `url(../src/assets/Cover-not-found.png)`
+    ? book.cover = `url(/assets/Cover-not-found.png)`
           // filter the array covers so we don't have 404 error
     : book.cover = `url(https://covers.openlibrary.org/b/id/${bookInfo.covers.filter(n => n != -1)[0]}-M.jpg)`
   // checking if there is the author info
