@@ -35,12 +35,13 @@ You can search a subject in the search-box and click on the search-button or pre
 If you are very lazy, there are pre-made categories ready just for you.
 
 For every book you can click on it for having additional description.
+
 ![book's description](./readme-img/the-book-index-description.png)
 
 
 ### Responsive
 
-You can use this counter on several devices.
+You can use this app on several devices.
 
 #### Mobile device
 
