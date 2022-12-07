@@ -13,6 +13,7 @@ body,.result, .card-book,nav, .title-search-container, footer, main, .search-box
 body{
     flex-direction: column;
     align-items: center;
+    background: #fff;
 }
 main{
     flex-direction: column;
