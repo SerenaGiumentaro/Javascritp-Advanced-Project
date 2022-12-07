@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const path = require('path')
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     mode: 'development',
@@ -17,35 +17,18 @@ module.exports = {
             favicon: './src/assets/favicon.ico',
             publicPath: './'
         }),
-        new FaviconsWebpackPlugin({
-          logo: './src/assets/favicon.png',
-          publicPath: '.',
-          prefix: 'icons-[hash]/',
-          emitStats: false,
-          statsFilename: 'iconstats-[hash].json',
-          persistentCache: true,
-          inject: true,
-          background: '#fff',
-          icons: {
-            android: true,
-            appleIcon: true,
-            appleStartup: true,
-            coast: false,
-            favicons: true,
-            firefox: true,
-            opengraph: false,
-            twitter: false,
-            yandex: false,
-            windows: false
-        }
-      })
+        new CopyPlugin({
+          patterns:[
+            {from: './src/assets', to: 'assets'}
+          ]
+        })
     ],
     module: {
         rules: [
           {
             test: /\.css$/i,
-            use: ["style-loader", "css-loader"],
-          },
-        ],
+            use: ["style-loader", "css-loader"]
+          }
+        ]
       }
 }
