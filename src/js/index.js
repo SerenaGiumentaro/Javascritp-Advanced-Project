@@ -30,7 +30,7 @@ async function callApi(subject){
       // checking if the data exist 
       if(response.data.work_count === 0){
         // show a message when nothing is found 
-        const message = draw('msg',result, 'p')
+        const message = draw('msg', result, 'p')
         message.innerHTML = "Sorry! Nothing found, try to use different words..."
         // hide the loader
         loader.classList.add('hidden')
