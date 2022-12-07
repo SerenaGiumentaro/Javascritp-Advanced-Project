@@ -6,6 +6,7 @@ const submit = document.getElementById('submit')
 const result = document.querySelector('.result')
 const categories = document.querySelector('nav')
 const categoriesList = document.querySelectorAll('nav li')
+const loader = document.querySelector('.loading')
 let allTheData = []
 
 
@@ -21,9 +22,8 @@ async function callApi(subject){
     // empty the result element from previous research 
     result.innerHTML = ''
     // creating loader 
-    const loading = document.createElement('p')
-    loading.innerHTML = 'Loading...'
-    result.append(loading)
+    loader.classList.remove('hidden')
+    
     try{
       const response = await axios.get(`https://openlibrary.org/subjects/${subject}.json`)
       // handle success
@@ -34,7 +34,7 @@ async function callApi(subject){
         // show a message when nothing is found 
         const message = draw('msg',result, 'p')
         message.innerHTML = "Sorry! Nothing found, try to use different words..."
-        loading.innerHTML = ''
+        loader.classList.add('hidden')
         return
       }
       // we receive an array of works and we loop it for show all data 
@@ -44,8 +44,8 @@ async function callApi(subject){
         const book = await createObjFromData(work)
         allTheData.push(book)
       }))
-      console.log(allTheData)
-      loading.innerHTML = ''
+
+      loader.classList.add('hidden')
       renderBooks(allTheData)
   
     }

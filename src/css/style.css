@@ -171,6 +171,77 @@ footer{
 .contacts{
     justify-content: center;
 }
+/* loader  */
+.loader {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 12px 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+.loader-17 .css-square { 
+    position: absolute;
+    top: 50%;
+    width: 25px; height: 7px;
+  background: #5603AD;
+  -webkit-box-shadow: 2px 2px 3px 0px #D3F6DB;
+          box-shadow: 2px 2px 3px 0px #D3F6DB;
+ }
+  .loader-17 .square1 {
+      left: 70px;
+      -webkit-animation: dominos 1s 0.125s ease-in infinite;
+      animation: dominos 1s 0.125s infinite;
+  }
+  
+  .loader-17 .square2 {
+      left: 60px;
+      -webkit-animation: dominos 1s 0.3s ease infinite;
+      animation: dominos 1s 0.3s ease infinite;
+  }
+  
+  .loader-17 .square3 {
+      left: 50px;
+      -webkit-animation: dominos 1s 0.425s ease infinite;
+      animation: dominos 1s 0.425s ease infinite;
+  }
+  
+  .loader-17 .square4 {
+      left: 40px;
+      -webkit-animation: dominos 1s 0.540s ease infinite;
+      animation: dominos 1s 0.540s ease infinite;
+  }
+  
+  .loader-17 .square5 {
+      left: 30px;
+      -webkit-animation: dominos 1s 0.665s ease infinite;
+      animation: dominos 1s 0.665s ease infinite;
+  }
+  
+  .loader-17 .square6 {
+      left: 20px;
+      -webkit-animation: dominos 1s 0.79s ease infinite;
+      animation: dominos 1s 0.79s ease infinite;
+  }
+  
+  .loader-17 .square7 {
+      left: 10px;
+      -webkit-animation: dominos 1s 0.9s ease infinite;
+      animation: dominos 1s 0.9s ease infinite;
+  }
+  
+  .loader-17 .square8 {
+      left: 0px;
+      -webkit-animation: dominos 1s 1s ease infinite;
+      animation: dominos 1s 1s ease infinite;
+  }
+
+  @keyframes dominos {
+    50% { opacity: 0.7; }
+    75% { -webkit-transform: rotate(90deg); transform: rotate(90deg); }
+    80% { opacity: 1; } 
+   }
 @media screen and (max-width:600px) {
     h1{
         font-size: 3rem;
