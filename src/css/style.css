@@ -258,4 +258,7 @@ footer{
    .info{
     width: 70%;
    }
+   .result{
+    padding-top: 30px;
+   }
 }

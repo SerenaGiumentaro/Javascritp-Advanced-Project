@@ -95,9 +95,13 @@ async function createObjFromData(work){
     : book.cover = `url(https://covers.openlibrary.org/b/id/${bookInfo.covers.filter(n => n != -1)[0]}-M.jpg)`
 
   book.description = bookInfo.description?.value || bookInfo.description || `Sorry! We don't have any description about this title`
-  const authorsRes = await axios.get(`https://openlibrary.org${bookInfo.authors[0].author.key}.json`)
-          
-  book.author = authorsRes.data.name
+  console.log(bookInfo)
+  if(bookInfo.authors && bookInfo.authors !== null){
+    const authorsRes = await axios.get(`https://openlibrary.org${bookInfo.authors[0].author.key}.json`) 
+    book.author = authorsRes.data.name
+  }else{
+    book.author = 'No author found'       
+  }
             
   return book                
 }
