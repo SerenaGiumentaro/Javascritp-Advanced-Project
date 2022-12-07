@@ -13,7 +13,6 @@ body,.result, .card-book,nav, .title-search-container, footer, main, .search-box
 body{
     flex-direction: column;
     align-items: center;
-    
 }
 main{
     flex-direction: column;
@@ -110,7 +109,6 @@ nav{
     background:#D3F6DB ;
     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
-
 nav li{
     display: flex;
     justify-content: center;
@@ -124,7 +122,6 @@ nav li{
     margin: 7px 10px;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     border-radius: 7px;
-
 }
 input[type='search']{
     width: 40vw;
@@ -142,7 +139,6 @@ button[type='submit']{
     cursor: pointer;
     border: none;
     padding: 5px;
-    
 }
 .search-box{
     margin: .5rem 0;
@@ -150,7 +146,6 @@ button[type='submit']{
 .title-search-container{
     flex-direction: column;
     align-items: center;
-    
 }
 footer{
     position: fixed;
@@ -189,60 +184,53 @@ footer{
   background: #5603AD;
   -webkit-box-shadow: 2px 2px 3px 0px #D3F6DB;
           box-shadow: 2px 2px 3px 0px #D3F6DB;
- }
-  .loader-17 .square1 {
+}
+.loader-17 .square1 {
       left: 70px;
       -webkit-animation: dominos 1s 0.125s ease-in infinite;
       animation: dominos 1s 0.125s infinite;
-  }
-  
-  .loader-17 .square2 {
+}
+.loader-17 .square2 {
       left: 60px;
       -webkit-animation: dominos 1s 0.3s ease infinite;
       animation: dominos 1s 0.3s ease infinite;
-  }
-  
-  .loader-17 .square3 {
+}
+.loader-17 .square3 {
       left: 50px;
       -webkit-animation: dominos 1s 0.425s ease infinite;
       animation: dominos 1s 0.425s ease infinite;
-  }
-  
-  .loader-17 .square4 {
+}
+.loader-17 .square4 {
       left: 40px;
       -webkit-animation: dominos 1s 0.540s ease infinite;
       animation: dominos 1s 0.540s ease infinite;
-  }
-  
-  .loader-17 .square5 {
+}
+.loader-17 .square5 {
       left: 30px;
       -webkit-animation: dominos 1s 0.665s ease infinite;
       animation: dominos 1s 0.665s ease infinite;
-  }
-  
-  .loader-17 .square6 {
+}
+.loader-17 .square6 {
       left: 20px;
       -webkit-animation: dominos 1s 0.79s ease infinite;
       animation: dominos 1s 0.79s ease infinite;
-  }
-  
-  .loader-17 .square7 {
+}
+.loader-17 .square7 {
       left: 10px;
       -webkit-animation: dominos 1s 0.9s ease infinite;
       animation: dominos 1s 0.9s ease infinite;
-  }
-  
-  .loader-17 .square8 {
+}
+.loader-17 .square8 {
       left: 0px;
       -webkit-animation: dominos 1s 1s ease infinite;
       animation: dominos 1s 1s ease infinite;
-  }
+}
 
-  @keyframes dominos {
+@keyframes dominos {
     50% { opacity: 0.7; }
     75% { -webkit-transform: rotate(90deg); transform: rotate(90deg); }
     80% { opacity: 1; } 
-   }
+}
 @media screen and (max-width:600px) {
     h1{
         font-size: 3rem;
@@ -260,6 +248,6 @@ footer{
     width: 70%;
    }
    .result{
-    padding-top: 30px;
+    padding-top: 17px;
    }
 }
