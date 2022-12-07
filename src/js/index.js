@@ -26,18 +26,17 @@ async function callApi(subject){
     
     try{
       const response = await axios.get(`https://openlibrary.org/subjects/${subject}.json`)
-      // handle success
-      // empty the loader 
   
       // checking if the data exist 
       if(response.data.work_count === 0){
         // show a message when nothing is found 
         const message = draw('msg',result, 'p')
         message.innerHTML = "Sorry! Nothing found, try to use different words..."
+        // hide the loader
         loader.classList.add('hidden')
         return
       }
-      // we receive an array of works and we loop it for show all data 
+      // empty the array from previusos research 
       allTheData = []
   
       await Promise.all(response.data.works.map(async work => {
@@ -47,16 +46,11 @@ async function callApi(subject){
 
       loader.classList.add('hidden')
       renderBooks(allTheData)
-  
     }
     catch(error){
       console.error(error)
     }
-
-    }
-
-
-
+  }
 
 // function for have data from input search console 
 const getData = () => {
@@ -66,6 +60,7 @@ const getData = () => {
   callApi(searchData)
 }
 
+// function for have data from categories button
 const categoriesData = (e) => {
     categoriesList.forEach(el => el.classList.remove('active'))
     if(e.target === categories){return}
@@ -85,7 +80,6 @@ keyword.addEventListener('keydown', (e) => {
 // function that create an oblect with all data 
 async function createObjFromData(work){
   const book = {title: work.title, cover:'', author:'', description:''}
-
   const res = await axios.get(`https://openlibrary.org${work.key}.json`)  
   const bookInfo = res.data       
   // checking if there is a cover otherwise use the generic photo
@@ -93,16 +87,14 @@ async function createObjFromData(work){
     ? book.cover = `url(../src/assets/Cover-not-found.png)`
           // filter the array covers so we don't have 404 error
     : book.cover = `url(https://covers.openlibrary.org/b/id/${bookInfo.covers.filter(n => n != -1)[0]}-M.jpg)`
-
+  // checking if there is the author info
   book.description = bookInfo.description?.value || bookInfo.description || `Sorry! We don't have any description about this title`
-  console.log(bookInfo)
   if(bookInfo.authors && bookInfo.authors !== null){
     const authorsRes = await axios.get(`https://openlibrary.org${bookInfo.authors[0].author.key}.json`) 
     book.author = authorsRes.data.name
   }else{
     book.author = 'No author found'       
-  }
-            
+  }     
   return book                
 }
 
@@ -117,13 +109,12 @@ function renderBook(book){
       cover.style.backgroundImage = book.cover
       // click on book title give a book's description 
       cardBook.addEventListener('click', (e) => {showModule(e,book)})
-   
-      
 }
+// pass the renderBook function for all the book find
 function renderBooks(arrBook){
   arrBook.forEach(book => renderBook(book))
 }
-
+// show pop-up with the book's description
 function showModule(e,book){
   const thisBook = e.target
   const infoModule = draw('info', result, 'div')
