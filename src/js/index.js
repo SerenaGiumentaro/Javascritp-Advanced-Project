@@ -34,6 +34,7 @@ async function callApi(subject){
         // show a message when nothing is found 
         const message = draw('msg',result, 'p')
         message.innerHTML = "Sorry! Nothing found, try to use different words..."
+        loading.innerHTML = ''
         return
       }
       // we receive an array of works and we loop it for show all data 
@@ -69,7 +70,7 @@ const categoriesData = (e) => {
     categoriesList.forEach(el => el.classList.remove('active'))
     if(e.target === categories){return}
     e.target.classList.toggle('active')
-    const subject = e.target.textContent.toLowerCase()
+    const subject = e.target.dataset.categoria
     callApi(subject)
 }
 submit.addEventListener('click', getData)

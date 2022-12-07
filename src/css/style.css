@@ -7,7 +7,7 @@
     font-family: 'Playfair Display', serif;
 }
 /* flex elements  */
-body,.result, .card-book,nav, .title-search-container, footer, main, .search-box{
+body,.result, .card-book,nav, .title-search-container, footer, main, .search-box,.content-footer,.contacts{
     display: flex;
 }
 body{
@@ -41,8 +41,11 @@ h1 span{
     margin: 15px 5px;
     color:#5603AD ;
     font-size: 15px;
-    cursor: pointer;
-    text-decoration: underline;
+}
+.author{
+    color: #353535;
+    font-size: 13px;
+    margin: -16px 0 12px 5px;
 }
 .book-img{
     width: 200px;
@@ -55,10 +58,11 @@ h1 span{
 .card-book{
     flex-direction: column;
     width: 200px;
-    height: 300px;
+    height: 350px;
     margin: 20px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 5px;
+    cursor: pointer;
 }
 .msg{
     font-size: 20px;
@@ -110,6 +114,7 @@ nav li{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     color: #5603AD;
     width: 80px;
     height: 80px;
@@ -155,6 +160,16 @@ footer{
     justify-content: center;
     background-color: #353535;
     color: #D3F6DB;
+}
+.content-footer a{
+    color:#D3F6DB;
+    margin: 5px 10px;
+}
+.content-footer{
+    flex-direction: column;
+}
+.contacts{
+    justify-content: center;
 }
 @media screen and (max-width:600px) {
     h1{

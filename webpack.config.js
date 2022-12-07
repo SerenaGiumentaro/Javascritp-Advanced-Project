@@ -18,9 +18,27 @@ module.exports = {
             publicPath: './'
         }),
         new FaviconsWebpackPlugin({
-          logo: './src/assets/favicon.ico',
-          publicPath: '.'
-        })
+          logo: './src/assets/favicon.png',
+          publicPath: '.',
+          prefix: 'icons-[hash]/',
+          emitStats: false,
+          statsFilename: 'iconstats-[hash].json',
+          persistentCache: true,
+          inject: true,
+          background: '#fff',
+          icons: {
+            android: true,
+            appleIcon: true,
+            appleStartup: true,
+            coast: false,
+            favicons: true,
+            firefox: true,
+            opengraph: false,
+            twitter: false,
+            yandex: false,
+            windows: false
+        }
+      })
     ],
     module: {
         rules: [
