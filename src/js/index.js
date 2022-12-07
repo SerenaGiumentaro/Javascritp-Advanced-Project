@@ -48,7 +48,8 @@ async function callApi(subject){
       renderBooks(allTheData)
     }
     catch(error){
-      console.error(error)
+      console.error(error.message)
+      alert(`Sorry something goes wrong, try again: ${error.message}`)
     }
   }
 
