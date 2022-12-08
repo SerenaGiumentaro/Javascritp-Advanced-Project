@@ -56,7 +56,7 @@ async function callApi(subject){
 // function for have data from input search console 
 const getData = () => {
   // reading the value in the input text and transform for being used in json url 
-  const searchData = keyword.value.toLowerCase().split(' ').join('_')
+  const searchData = keyword.value.toLowerCase().trim().split(' ').join('_')
   // with the axios's help asking for data from Open Library API 
   callApi(searchData)
 }
