@@ -1,20 +1,59 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title> <%= htmlWebpackPlugin.options.title %></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <script defer src="/dist/bundle.js"></script> -->
-</head>
-
+    <head>
+      <meta charset="utf-8">
+      <title> The Book Index </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+      <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
   <body>
-<h1>All books you want</h1>
-<div class="search-box">
-  <input type="text" placeholder="What you want to read?" id="keyword">
-  <input type="submit" id="submit" value="Cerca"></input>
-</div>
-<div class="result">
-  
-</div>
+    <header>
+      <nav>
+        <li data-categoria="adventure"><i class="fas fa-space-shuttle"></i>Adventure</li>
+        <li data-categoria="fantasy"><i class="fas fa-dragon"></i>Fantasy</li>
+        <li data-categoria="classic"><i class="fas fa-book-open"></i>Classic</li>
+        <li data-categoria="horror"><i class="fas fa-skull"></i>Horror</li>
+        <li data-categoria="western"><i class="fas fa-hat-cowboy"></i>Western</li>
+        <li data-categoria="comics"><i class="fas fa-comments"></i>Comics</li>
+        <li data-categoria="history"><i class="fas fa-landmark"></i>History</li>
+        <li data-categoria="romance"><i class="fas fa-heart"></i>Romance</li>
+        <li data-categoria="music"><i class="fas fa-music"></i>Music</li>
+        <li data-categoria="science"><i class="fas fa-flask"></i>Science</li>
+      </nav>
+    </header>
+    <main>
+      <div class="title-search-container">
+        <h1>The <span>Book</span> Index</h1>
+        <div class="search-box">
+          <input type="search" placeholder="Search a book, an author or genre" id="keyword">
+          <button type="submit" id="submit" onsubmit="getData()"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+      <section class="loading hidden">
+        <div class="loader loader-17">
+          <div class="css-square square1"></div>
+          <div class="css-square square2"></div>
+          <div class="css-square square3"></div>
+          <div class="css-square square4"></div>
+          <div class="css-square square5"></div>
+          <div class="css-square square6"></div>
+          <div class="css-square square7"></div>
+          <div class="css-square square8"></div>
+        </div>
+      </section>
+      <div class="result"></div>
+    </main>
+    <footer>
+      <div class="content-footer">
+        <!-- 2022  -->
+        <p>Developed By Serena Giumentaro</p>   
+        <div class="contacts">
+          <a href="https://www.linkedin.com/in/serenagiumentaro/"><i class="fab fa-linkedin"></i></a>
+          <a href="https://github.com/SerenaGiumentaro"><i class="fab fa-github"></i></a>  
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const path = require('path')
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     mode: 'development',
@@ -11,16 +12,22 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: "All books you want",
-            template: path.resolve(__dirname, "./src/index.html")
+            title: "The Book Index",
+            template: path.resolve(__dirname, "./src/index.html"),
+            favicon: './src/assets/favicon.ico'
+        }),
+        new CopyPlugin({
+          patterns:[
+            {from: './src/assets', to: 'assets'}
+          ]
         })
     ],
     module: {
         rules: [
           {
             test: /\.css$/i,
-            use: ["style-loader", "css-loader"],
-          },
-        ],
+            use: ["style-loader", "css-loader"]
+          }
+        ]
       }
 }
