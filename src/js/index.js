@@ -64,7 +64,8 @@ async function callApi(subject) {
 }
 
 // function for have data from input search console
-const getData = () => {
+const getData = (e) => {
+  e.preventDefault();
   // reading the value in the input text and transform for being used in json url
   const searchData = keyword.value.toLowerCase().trim().split(" ").join("_");
   // with the axios's help asking for data from Open Library API
@@ -84,12 +85,6 @@ const categoriesData = (e) => {
 submit.addEventListener("click", getData);
 categories.addEventListener("click", categoriesData);
 
-// activate search after press Enter key
-keyword.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    getData();
-  }
-});
 // function that create an oblect with all data
 async function createObjFromData(work) {
   const book = new Book(work.title, "", "", "");
