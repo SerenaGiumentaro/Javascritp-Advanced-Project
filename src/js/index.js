@@ -9,12 +9,12 @@ const categoriesList = document.querySelectorAll("nav li");
 const loader = document.querySelector(".loading");
 let allTheData = [];
 
-class Book{
-  constructor(title, cover, author,description){
-    this.title = title
-    this.cover = cover
-    this.author = author
-    this.description = description
+class Book {
+  constructor(title, cover, author, description) {
+    this.title = title;
+    this.cover = cover;
+    this.author = author;
+    this.description = description;
   }
 }
 function draw(className, elToAppend, type) {
@@ -92,22 +92,25 @@ keyword.addEventListener("keydown", (e) => {
 });
 // function that create an oblect with all data
 async function createObjFromData(work) {
-  const book = new Book(work.title,'','','');
+  const book = new Book(work.title, "", "", "");
   const res = await axios.get(`https://openlibrary.org${work.key}.json`);
   const bookInfo = res.data;
   // checking if there is a cover otherwise use the generic photo
-  !bookInfo.covers || bookInfo.covers === null
-    ? (book.cover = `url(/assets/Cover-not-found.png)`)
-    : // filter the array covers so we don't have 404 error
-      (book.cover = `url(https://covers.openlibrary.org/b/id/${
+  const hasCover = bookInfo.covers && bookInfo.covers !== null;
+  book.cover = hasCover
+    ? `url(https://covers.openlibrary.org/b/id/${
         bookInfo.covers.filter((n) => n != -1)[0]
-      }-M.jpg)`);
+      }-M.jpg)`
+    : `url(/assets/Cover-not-found.png)`;
+
   // checking if there is the author info
   book.description =
     bookInfo.description?.value ||
     bookInfo.description ||
     `Sorry! We don't have any description about this title`;
-  if (bookInfo.authors && bookInfo.authors !== null) {
+
+  const hasAuthor = bookInfo.authors && bookInfo.authors !== null;
+  if (hasAuthor) {
     const authorsRes = await axios.get(
       `https://openlibrary.org${bookInfo.authors[0].author.key}.json`
     );
