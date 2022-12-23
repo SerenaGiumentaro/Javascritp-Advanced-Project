@@ -7,7 +7,7 @@ const result = document.querySelector(".result");
 const categories = document.querySelector("nav");
 const categoriesList = document.querySelectorAll("nav li");
 const loader = document.querySelector(".loading");
-let allTheData = [];
+// let allTheData = [];
 
 class Book {
   constructor(title, cover, author, description) {
@@ -45,18 +45,17 @@ async function callApi(subject) {
       loader.classList.add("hidden");
       return;
     }
-    // empty the array from previusos research
-    allTheData = [];
+    // // empty the array from previusos research
+    // allTheData = [];
 
-    await Promise.all(
+   const allTheBook =  await Promise.all(
       response.data.works.map(async (work) => {
-        const book = await createObjFromData(work);
-        allTheData.push(book);
+        return await createObjFromData(work);
       })
     );
 
     loader.classList.add("hidden");
-    renderBooks(allTheData);
+    renderBooks(allTheBook);
   } catch (error) {
     console.error(error.message);
     alert(`Sorry something goes wrong, try again: ${error.message}`);
