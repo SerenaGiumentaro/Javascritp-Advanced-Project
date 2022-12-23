@@ -7,7 +7,6 @@ const result = document.querySelector(".result");
 const categories = document.querySelector("nav");
 const categoriesList = document.querySelectorAll("nav li");
 const loader = document.querySelector(".loading");
-// let allTheData = [];
 
 class Book {
   constructor(title, cover, author, description) {
@@ -45,10 +44,8 @@ async function callApi(subject) {
       loader.classList.add("hidden");
       return;
     }
-    // // empty the array from previusos research
-    // allTheData = [];
 
-   const allTheBook =  await Promise.all(
+    const allTheBook = await Promise.all(
       response.data.works.map(async (work) => {
         return await createObjFromData(work);
       })
