@@ -14,7 +14,7 @@ Progetto del modulo Javascript Advanced per Start2impact University
 
 This is the project for the module `Javascript Advanced` from `Start2Impact University`.
 
-The app's target is to encorauge to reading more books, and does it using the `Open Library API`. 
+The app's target is to encourage to reading more books, and does it using the `Open Library API`. 
 
 ![desktop image](./readme-img/the-book-index-web.png)
 
